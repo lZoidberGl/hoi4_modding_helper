@@ -10,11 +10,30 @@ using System.Windows.Forms;
 
 namespace HOI4_Modding_Helper
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        Form GFXHLP = new GFX_Helper();
+        Form FocusHelp = new EasyFocusTree();
+        Form StateHelp = new state_helper_form();
+
+        private void to_GFX_Click(object sender, EventArgs e)
+        {
+            GFXHLP.Show();
+        }
+
+        private void toEasyFocus_Click(object sender, EventArgs e)
+        {
+            FocusHelp.Show();
+        }
+
+        private void to_hz_helper_Click(object sender, EventArgs e)
+        {
+            StateHelp.Show();
         }
     }
 }
