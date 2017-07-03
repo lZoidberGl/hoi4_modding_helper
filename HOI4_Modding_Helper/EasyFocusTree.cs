@@ -75,7 +75,7 @@ namespace HOI4_Modding_Helper
 
                 ThrowToGrid();
 
-                this.Refresh();
+               // this.Refresh();
             }
             else if (sender is Button)
             {
@@ -153,12 +153,13 @@ namespace HOI4_Modding_Helper
             {
 
                 e.Graphics.DrawLine(blk, 0, 75 * i, this.Width, 75 * i);
-                e.Graphics.DrawLine(blk, 75 * i, 0, 75 * i, this.Height);
+                e.Graphics.DrawLine(blk, 75 * i, 0, 75 * i, this.Height);        
 
                 //Thread.Sleep(15);
             }
 
         }
+
 
         private void mm_Paint(object sender, PaintEventArgs e)
         {
@@ -182,5 +183,44 @@ namespace HOI4_Modding_Helper
                 MessageBox.Show("OK");
             }
         }
+
+        private void EasyFocusTree_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mm_MouseMove(object sender, MouseEventArgs e)
+        {
+            //эксперементы
+            /*
+            Button btn = new Button();
+            
+            if (needtodrw(e.Location) == true)
+            {               
+                btn.Height = 30;
+                btn.Width = 30;
+                btn.Location = new Point(75 - btn.Width/2, 75 - btn.Height/2);
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.BackColor = Color.Transparent;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.Text = "blet";
+                mm.Controls.Add(btn);
+            }
+            else
+            {
+                try { mm.Controls.Remove(btn); } catch (Exception) { mm.BackColor = Color.Red; }
+            }
+            */
+        }
+
+        /*'эксперементыыыыы
+        public bool needtodrw(Point pos)
+        {
+            if ((pos.X == 75 && pos.Y == 75) || (pos.X < 90 && pos.X > 60 && pos.Y < 90 && pos.Y > 60))
+                return true;
+            else
+                return false;
+        }
+        */
     }
 }

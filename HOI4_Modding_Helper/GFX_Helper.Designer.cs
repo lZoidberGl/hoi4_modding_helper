@@ -37,6 +37,8 @@
             this.path_to_dds_txt = new System.Windows.Forms.TextBox();
             this.path_to_dds_folder = new System.Windows.Forms.Button();
             this.EC2013_check = new System.Windows.Forms.CheckBox();
+            this.equalcount = new System.Windows.Forms.Label();
+            this.compare_to_dds = new System.Windows.Forms.Button();
             this.YML_panel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +50,7 @@
             this.generated_gfx_text_box.Multiline = true;
             this.generated_gfx_text_box.Name = "generated_gfx_text_box";
             this.generated_gfx_text_box.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.generated_gfx_text_box.Size = new System.Drawing.Size(452, 238);
+            this.generated_gfx_text_box.Size = new System.Drawing.Size(452, 301);
             this.generated_gfx_text_box.TabIndex = 0;
             // 
             // Start_Button
@@ -139,16 +141,39 @@
             this.EC2013_check.Text = "EC2013 mode";
             this.EC2013_check.UseVisualStyleBackColor = true;
             // 
+            // equalcount
+            // 
+            this.equalcount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.equalcount.Location = new System.Drawing.Point(0, 404);
+            this.equalcount.Name = "equalcount";
+            this.equalcount.Size = new System.Drawing.Size(452, 23);
+            this.equalcount.TabIndex = 7;
+            this.equalcount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // compare_to_dds
+            // 
+            this.compare_to_dds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.compare_to_dds.Location = new System.Drawing.Point(0, 427);
+            this.compare_to_dds.Name = "compare_to_dds";
+            this.compare_to_dds.Size = new System.Drawing.Size(452, 23);
+            this.compare_to_dds.TabIndex = 8;
+            this.compare_to_dds.Text = "Сравнение с .dds";
+            this.compare_to_dds.UseVisualStyleBackColor = true;
+            this.compare_to_dds.Visible = false;
+            this.compare_to_dds.Click += new System.EventHandler(this.compare_to_dds_Click);
+            // 
             // GFX_Helper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 341);
-            this.Controls.Add(this.EC2013_check);
+            this.ClientSize = new System.Drawing.Size(452, 450);
             this.Controls.Add(this.generated_gfx_text_box);
+            this.Controls.Add(this.equalcount);
+            this.Controls.Add(this.EC2013_check);
             this.Controls.Add(this.Start_Button);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.YML_panel);
+            this.Controls.Add(this.compare_to_dds);
             this.Name = "GFX_Helper";
             this.Text = "GFX_Helper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GFX_Helper_FormClosing);
@@ -172,5 +197,7 @@
         private System.Windows.Forms.TextBox path_to_dds_txt;
         private System.Windows.Forms.Button path_to_dds_folder;
         private System.Windows.Forms.CheckBox EC2013_check;
+        private System.Windows.Forms.Label equalcount;
+        private System.Windows.Forms.Button compare_to_dds;
     }
 }

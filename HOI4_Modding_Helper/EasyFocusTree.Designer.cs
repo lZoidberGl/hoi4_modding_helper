@@ -98,6 +98,7 @@
             this.mm.TabIndex = 1;
             this.mm.Paint += new System.Windows.Forms.PaintEventHandler(this.mm_Paint);
             this.mm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EasyFocusTree_MouseDown);
+            this.mm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mm_MouseMove);
             // 
             // EasyFocusTree
             // 
@@ -109,9 +110,10 @@
             this.DoubleBuffered = true;
             this.Name = "EasyFocusTree";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "EasyFocusTree";
+            this.Text = "EasyFocusTree эксперементальный проект";
             this.TransparencyKey = System.Drawing.Color.LightPink;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EasyFocusTree_FormClosing);
+            this.Load += new System.EventHandler(this.EasyFocusTree_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.EasyFocusTree_Paint);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

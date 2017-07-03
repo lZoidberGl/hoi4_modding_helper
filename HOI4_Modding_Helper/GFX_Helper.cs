@@ -28,6 +28,7 @@ namespace HOI4_Modding_Helper
         String pth;
 
         List<string> nameList = new List<string>();
+        string[] postFixes = { "_hog" , "_ecm" , "_fgm" , "_ssch" , "_isch", "_defm" , "_chogs" , "_chogf" , "_chognf" , "_chogaf" };
 
         private void path_to_yml_Click(object sender, EventArgs e)
         {
@@ -49,7 +50,9 @@ namespace HOI4_Modding_Helper
         {
             if (path_to_dds_txt.Text == "")
             {
+                toDDS.SelectedPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Paradox Interactive", "Hearts of Iron IV", "mod" , "ec" , "gfx" , "interface" , "ideas" , "Poland");
                 toDDS.ShowDialog();
+                
                 path_to_dds_txt.Text = toDDS.SelectedPath;
 
                 CheckPath();
@@ -109,10 +112,14 @@ namespace HOI4_Modding_Helper
             }
         }
 
+
+
         private void Start_Button_Click(object sender, EventArgs e)
         {
             if (path_to_dds_txt.Text != "" && path_to_yml_txt.Text != "" && path_to_yml_txt.Text != "Путь к yml файлу отсутствует")
             {
+                int equal = 0;
+                int uniq = 0;
                 try
                 {
                     stringArray = File.ReadAllLines(path_to_yml_txt.Text);
@@ -121,16 +128,13 @@ namespace HOI4_Modding_Helper
                     {
                         if (s.Contains(":0"))
                         {
-                            if (generated_gfx_text_box.Text == "")
-                            {
-                                //generated_gfx_text_box.Text = s.Substring(0, s.IndexOf(":"));
-                                nameList.Add(s.Substring(0, s.IndexOf(":")));
-                            }
-                            else
-                            {
-                                //generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + s.Substring(0, s.IndexOf(":"));
-                                nameList.Add(s.Substring(0, s.IndexOf(":")));
-                            }
+
+                            nameList.Add(nospaces(s.Substring(0,s.IndexOf(":"))));
+                            // else
+                            // {
+                            //generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + s.Substring(0, s.IndexOf(":"));
+                            //     nameList.Add(s.Substring(0, s.IndexOf(":")));
+                            // }
                         }
 
                     }
@@ -139,20 +143,47 @@ namespace HOI4_Modding_Helper
 
                     generatePathPart();
 
+
+
+                    string usednames = "";
+
                     foreach (String i in nameList.ToArray())
                     {
-                        if ((i.Contains("_hog") || i.Contains("_ecm") || i.Contains("_fgm")) && EC2013_check.Checked)
+                        if ((i.Contains("_hog") || i.Contains("_ecm") || i.Contains("_fgm")) && EC2013_check.Checked && !usednames.Contains(i.Substring(0, i.Length - 4)))
                         {
-                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i + "\"" + Environment.NewLine + "		texturefile = " + pth  + i.Substring(0,i.Length - 4) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i.Substring(0, i.Length - 4) + "\"" + Environment.NewLine + "		texturefile = " + "\"" + pth  + i.Substring(0,i.Length - 4) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            usednames = usednames + " " + i.Substring(0, i.Length - 4);
+                            uniq++;
                         }
-                        else if ((i.Contains("_ssch") || i.Contains("_defm")) && EC2013_check.Checked)
+                        else if ((i.Contains("_ssch") || i.Contains("_defm") || i.Contains("_isch")) && EC2013_check.Checked && !usednames.Contains(i.Substring(0, i.Length - 5)))
                         {
-                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i + "\"" + Environment.NewLine + "		texturefile = " + pth + i.Substring(0, i.Length - 5) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i.Substring(0, i.Length - 5) + "\"" + Environment.NewLine + "		texturefile = " + "\"" + pth + i.Substring(0, i.Length - 5) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            usednames = usednames + " " + i.Substring(0, i.Length - 5);
+                            uniq++;
                         }
-                        else
+                        else if ((i.Contains("_chogs") || i.Contains("_chogf")) && EC2013_check.Checked && !usednames.Contains(i.Substring(0, i.Length - 6)))
+                        {
+                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i.Substring(0, i.Length - 6) + "\"" + Environment.NewLine + "		texturefile = " + "\"" + pth + i.Substring(0, i.Length - 6) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            usednames = usednames + " " + i.Substring(0, i.Length - 7);
+                            uniq++;
+                        }
+                        else if ((i.Contains("_chognf") || i.Contains("_chogaf")) && EC2013_check.Checked && !usednames.Contains(i.Substring(0, i.Length - 7)))
+                        {
+                            generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i.Substring(0, i.Length - 7) + "\"" + Environment.NewLine + "		texturefile = " + "\"" + pth + i.Substring(0, i.Length - 7) + ".dds" + "\"" + Environment.NewLine + "	}";
+                            usednames = usednames + " " + i.Substring(0, i.Length - 7);
+                            uniq++;
+                        }
+                        else if(!usednames.Contains(i) && !postFixes.Any(i.Contains))
                         {
                             generated_gfx_text_box.Text = generated_gfx_text_box.Text + Environment.NewLine + Environment.NewLine + "	spriteType = {" + Environment.NewLine + "		name = \"GFX_idea_" + i + "\"" + Environment.NewLine + "		texturefile = " + "\"" + pth + i + ".dds" + "\"" + Environment.NewLine + "	}";
+                            usednames = usednames + " " + i;
+                            uniq++;
                         }
+                        else if (usednames.Contains(i.Substring(0, i.Length - 4)) || usednames.Contains(i.Substring(0, i.Length - 5)) || usednames.Contains(i.Substring(0, i.Length - 6)) || usednames.Contains(i.Substring(0, i.Length - 7)) || usednames.Contains(i))
+                        {
+                            equal++;
+                        }
+
                     }
                 }
                 catch (Exception ex)
@@ -162,7 +193,21 @@ namespace HOI4_Modding_Helper
 
                 Array.Clear(fileArray, 0, fileArray.Length);
                 Array.Clear(stringArray, 0, stringArray.Length);
+                equalcount.Text = "Одинаковые: " +  equal.ToString() + " Уникальные:" + uniq.ToString();
             }
+        }
+
+        public string nospaces(string text)
+        {
+            foreach(char c in text)
+            {
+                if (c == ' ')
+                {
+                    text = text.Remove(text.IndexOf(c), 1);
+                }
+            }
+
+            return text;
         }
 
         private void generatePathPart()
@@ -208,8 +253,18 @@ namespace HOI4_Modding_Helper
             {
                 if (Directory.Exists(path_to_dds_txt.Text) == true)
                 {
-                    path_to_dds_folder.BackColor = Color.Yellow;                    
-                    tp.Show("Путь существует, но не удалось определить его пригодность (нет файлов .dds )", path_to_dds_folder,2000);
+                    path_to_dds_folder.BackColor = Color.Yellow;      
+                    if (Directory.GetFiles(path_to_dds_txt.Text).Any(s => s.Contains(".dds")))
+                    {
+                        tp.Show("Удалось обнаружить файлы .dds -- путь правильный", path_to_dds_folder, 4000);
+                        compare_to_dds.Show();
+                    }
+                    else
+                    {
+                        tp.Show("Путь существует, но не удалось определить его пригодность (нет файлов .dds )", path_to_dds_folder, 4000);
+                        compare_to_dds.Hide();
+                    }
+
                 }
                 else
                 {
@@ -225,5 +280,43 @@ namespace HOI4_Modding_Helper
             e.Cancel = true;
             this.Hide();
         }
+
+        private void compare_to_dds_Click(object sender, EventArgs e)
+        {
+            string[] files = Directory.GetFileSystemEntries(path_to_dds_txt.Text);
+            string[] namas = nameList.ToArray();
+           //string check = "";
+            int number = 0;
+            List<string> check = new List<string>();
+            List<string> uncheck = new List<string>();
+
+
+            foreach (string file in files )
+            {
+                string filename = Path.GetFileName(file);
+
+                if (namas.Any(filename.Substring(0, filename.Length - 4).Equals))
+                {
+                    check.Add(Path.GetFileName(file)); 
+                    number++;
+                }
+            }
+
+            MessageBox.Show(string.Join(Environment.NewLine, check), number.ToString());
+            number = 0;
+           foreach(string file in files)
+           {
+                string filename = Path.GetFileName(file);
+                if (!check.Any(filename.Equals))
+                {
+                    uncheck.Add(filename);
+                    number++;
+                }
+           }
+
+            MessageBox.Show(string.Join(Environment.NewLine, uncheck) , number.ToString());
+
+        }
+
     }
 }

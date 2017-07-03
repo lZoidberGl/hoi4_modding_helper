@@ -31,6 +31,7 @@
             this.to_GFX = new System.Windows.Forms.Button();
             this.to_EasyIdeology = new System.Windows.Forms.Button();
             this.to_hz_helper = new System.Windows.Forms.Button();
+            this.to_ISO_helper = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // to_GFX
@@ -64,13 +65,25 @@
             this.to_hz_helper.TabIndex = 2;
             this.to_hz_helper.Text = "Помошник с территорияим";
             this.to_hz_helper.UseVisualStyleBackColor = true;
-            this.to_hz_helper.Click += new System.EventHandler(this.to_hz_helper_Click);
+            this.to_hz_helper.Click += new System.EventHandler(this.to_state_helper_Click);
+            // 
+            // to_ISO_helper
+            // 
+            this.to_ISO_helper.Dock = System.Windows.Forms.DockStyle.Top;
+            this.to_ISO_helper.Location = new System.Drawing.Point(0, 150);
+            this.to_ISO_helper.Name = "to_ISO_helper";
+            this.to_ISO_helper.Size = new System.Drawing.Size(297, 50);
+            this.to_ISO_helper.TabIndex = 3;
+            this.to_ISO_helper.Text = "Помошник с ISO id";
+            this.to_ISO_helper.UseVisualStyleBackColor = true;
+            this.to_ISO_helper.Click += new System.EventHandler(this.to_ISO_Helper_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 311);
+            this.Controls.Add(this.to_ISO_helper);
             this.Controls.Add(this.to_hz_helper);
             this.Controls.Add(this.to_EasyIdeology);
             this.Controls.Add(this.to_GFX);
@@ -87,6 +100,7 @@
         private System.Windows.Forms.Button to_GFX;
         private System.Windows.Forms.Button to_EasyIdeology;
         private System.Windows.Forms.Button to_hz_helper;
+        private System.Windows.Forms.Button to_ISO_helper;
     }
 }
 

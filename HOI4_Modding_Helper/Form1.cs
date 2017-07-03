@@ -20,6 +20,7 @@ namespace HOI4_Modding_Helper
         Form GFXHLP = new GFX_Helper();
         Form FocusHelp = new EasyFocusTree();
         Form StateHelp = new state_helper_form();
+        Form ISO_helper = new ISO_country_helper();
 
         private void to_GFX_Click(object sender, EventArgs e)
         {
@@ -31,9 +32,14 @@ namespace HOI4_Modding_Helper
             FocusHelp.Show();
         }
 
-        private void to_hz_helper_Click(object sender, EventArgs e)
+        private void to_state_helper_Click(object sender, EventArgs e)
         {
             StateHelp.Show();
+        }
+
+        private void to_ISO_Helper_Click(object sender, EventArgs e)
+        {
+            ISO_helper.Show();
         }
     }
 }

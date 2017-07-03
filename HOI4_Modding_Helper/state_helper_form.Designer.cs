@@ -88,7 +88,7 @@
             this.findTags.Name = "findTags";
             this.findTags.Size = new System.Drawing.Size(260, 30);
             this.findTags.TabIndex = 1;
-            this.findTags.Text = "TAG";
+            this.findTags.Text = "TAG (country_tags)";
             this.findTags.UseVisualStyleBackColor = true;
             this.findTags.Click += new System.EventHandler(this.findTags_Click);
             // 
@@ -100,7 +100,7 @@
             this.states_dir.Name = "states_dir";
             this.states_dir.Size = new System.Drawing.Size(260, 30);
             this.states_dir.TabIndex = 2;
-            this.states_dir.Text = "STATES DIR";
+            this.states_dir.Text = "STATES DIRECTORY";
             this.states_dir.UseVisualStyleBackColor = true;
             this.states_dir.Click += new System.EventHandler(this.states_dir_Click);
             // 
@@ -179,7 +179,7 @@
             this.debug_button.Name = "debug_button";
             this.debug_button.Size = new System.Drawing.Size(260, 30);
             this.debug_button.TabIndex = 5;
-            this.debug_button.Text = "Debug";
+            this.debug_button.Text = "Debug (бесполезна)";
             this.debug_button.UseVisualStyleBackColor = false;
             this.debug_button.Visible = false;
             this.debug_button.Click += new System.EventHandler(this.debug_button_Click);

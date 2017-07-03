@@ -155,9 +155,11 @@ namespace HOI4_Modding_Helper
                 //MessageBox.Show(dataGridView1.CurrentCell.RowIndex.ToString());
         }
 
+        string log = "";
+
         private void start_Click(object sender, EventArgs e)
         {
-            string log = "";
+
             int fc = 0;
 
             if (DebugMode == true || (states_dir.BackColor == Color.LimeGreen && findTags.BackColor == Color.LimeGreen))
@@ -218,7 +220,7 @@ namespace HOI4_Modding_Helper
                                             //MessageBox.Show(s.Substring(0, 3) + " = " +  noSpaces(l).Substring(noSpaces(l).Length - 3, 3), "PASSED");
                                             //log = log + Environment.NewLine + s.Substring(0, 3) + " = " + noSpaces(l).Substring(noSpaces(l).Length - 3, 3) + " PASSED";
 
-                                        if (s.Remove(0,3).Length > 3 && !File.ReadAllText("Edited.txt").Contains(f))
+                                       if (s.Remove(0,3).Length > 3)
                                         {
                                             RewriteFile(f, fileText, s);
                                             if (log != "")
@@ -227,6 +229,16 @@ namespace HOI4_Modding_Helper
                                                 log = f;
                                         }
 
+                                        /*   if (!File.ReadAllLines("Edited.txt").Any(i => i == f))
+                                           {
+                                               MessageBox.Show("Edited contains: " + f);
+
+                                               if (log != "")
+                                                   log = log + Environment.NewLine + f;
+                                               else
+                                                   log = f;
+                                           }
+                                           */
                                     }
                                     else
                                     {
@@ -266,39 +278,74 @@ namespace HOI4_Modding_Helper
 
             bool first = true;
             bool startRead = false;
+            int flags = 0;
 
-           
+
             foreach (string s in fileText)
             {
-
-                if (s.Contains("owner"))
+                if (s.Contains("		set_state_flag"))
                 {
-                    if (first == true)
+                    flags++;
+                    //log = log + Environment.NewLine + " [int] flags increased";
+                }
+            }
+
+            if (flags == 0)
+            {
+                foreach (string s in fileText)
+                {
+                    if (s.Contains("owner"))
+                    {
+                        if (first == true)
+                        {
+                            txtPt1.Add(s);
+                            first = false;
+                            break;
+                        }
+
+                    }
+                    txtPt1.Add(s);
+                }
+
+                foreach (string s in fileText)
+                {
+                    if (startRead == true)
+                    {
+                        txtPt2.Add(s);
+                    }
+                    if (s.Contains("owner"))
+                    {
+                        startRead = true;
+                    }
+                }
+
+                txtPt1.Add("		set_state_flag = " + tagNreligion.Remove(0, 4));
+                txtPt1.AddRange(txtPt2);
+            }
+            else if (flags > 1)
+            {
+                foreach (string s in fileText)
+                {
+                    if (s.Contains("		set_state_flag"))
+                    {
+                        if (flags == 1)
+                        {
+                            txtPt1.Add(s);
+                        }
+                        else
+                        {
+                            flags--;
+                        }
+
+                    }
+                    else
                     {
                         txtPt1.Add(s);
-                        first = false;
-                        break;
                     }
 
                 }
-                txtPt1.Add(s);
+
             }
-
-            foreach (string s in fileText)
-            {
-                if (startRead == true)
-                {
-                    txtPt2.Add(s);
-                }
-                if (s.Contains("owner"))
-                {
-                    startRead = true;
-                }
-            }
-
-            txtPt1.Add("		set_state_flag = " + tagNreligion.Remove(0,4));
-            txtPt1.AddRange(txtPt2);
-
             //MessageBox.Show(string.Join(Environment.NewLine,txtPt1.ToArray()));
 
             var UTF8NoBom = new UTF8Encoding(false);
